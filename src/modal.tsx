@@ -120,6 +120,7 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
     children: PropTypes.node.isRequired,
     deviceHeight: PropTypes.number,
     deviceWidth: PropTypes.number,
+    bottomPadding: PropTypes.number,
     isVisible: PropTypes.bool.isRequired,
     hideModalContentWhileAnimating: PropTypes.bool,
     propagateSwipe: PropTypes.bool,
@@ -176,6 +177,7 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
     isVisible: false,
     onModalShow: () => null,
     onModalWillShow: () => null,
+    bottomPadding: 0,
     onModalHide: () => null,
     onModalWillHide: () => null,
     onBackdropPress: () => null,
@@ -669,13 +671,15 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
       backdropColor,
       useNativeDriver,
       onBackdropPress,
+      bottomPadding,
     } = this.props;
     const hasCustomBackdrop = !!this.props.customBackdrop;
 
     const backdropComputedStyle = [
       {
         width: this.getDeviceWidth(),
-        height: this.getDeviceHeight(),
+        height: this.getDeviceHeight() - bottomPadding,
+        bottom: bottomPadding,
         backgroundColor:
           this.state.showContent && !hasCustomBackdrop
             ? backdropColor
@@ -720,6 +724,7 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
       backdropTransitionOutTiming,
       customBackdrop,
       children,
+      bottomPadding,
       isVisible,
       onModalShow,
       onBackButtonPress,
