@@ -779,6 +779,21 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
     // If coverScreen is set to false by the user
     // we render the modal inside the parent view directly
     if (!coverScreen && this.state.isVisible) {
+      if (avoidKeyboard) {
+        return (
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : null}
+            pointerEvents="box-none"
+            style={[
+              styles.backdrop,
+              { zIndex: 2, opacity: 1, margin: 0, backgroundColor: 'transparent' },
+            ]}
+          >
+            {hasBackdrop && backdrop}
+            {containerView}
+          </KeyboardAvoidingView>
+        )
+      }
       return (
         <View
           pointerEvents="box-none"
