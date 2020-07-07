@@ -80,6 +80,7 @@ export interface ModalProps extends ViewProps {
   useNativeDriver: boolean;
   deviceHeight: number;
   deviceWidth: number;
+  bottomPadding: number;
   hideModalContentWhileAnimating: boolean;
   propagateSwipe: boolean;
   isVisible: boolean;
